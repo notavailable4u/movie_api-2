@@ -1,8 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-//const staticPath = path.join(__dirname, 'public');
-//const docuRouter = require('./routes/docuRoute.js');
+const serveStatic = require('serve-static')
 
 let top10Movies = [
     {
@@ -64,27 +63,8 @@ app.get('/', (req, res) => {
     res.send('<h2>This is a default textual response of my choosing.</h2>');
 });
 
-app.get('/documentation.html', (req, res) => {
-    res.redirect('/public/documentation.html')
-});
-
-app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/documentation', docuRouter);
-
-module.exports = app;
-
-//terminal logging
-const bodyParser = require('body-parser');
-const methodOverride = require('method-override');
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
-app.use(methodOverride());
-app.use((err, req, res) => {
-    console.error(err.stack);
-    res.status(500).send('Internal Server Error');
-});
+//static files
+app.use(serveStatic('./public', { extensions: ['html', 'htm'] }));
 
 // listen for requests
 app.listen(8080, () => {
