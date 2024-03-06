@@ -66,6 +66,19 @@ app.get('/', (req, res) => {
 //static files
 app.use(serveStatic('./public', { extensions: ['html', 'htm'] }));
 
+//terminal logging
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use((err, req, res) => {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error');
+});
+
 // listen for requests
 app.listen(8080, () => {
     console.log('Your app is listening on port 8080.');
