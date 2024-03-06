@@ -18,6 +18,9 @@ jspm_packages/
 # Optional eslint cache
 .eslintcache
 
+#ESLintrc
+.eslintrc.json
+
 # Optional stylelint cache
 .stylelintcache
 
@@ -27,6 +30,8 @@ jspm_packages/
 # Yarn Integrity file
 .yarn-integrity
 
+# stylelint
+stylelint.config.js
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
