@@ -192,3 +192,7 @@
 ::1 - - [06/Mar/2024:17:24:07 +0000] "GET /index HTTP/1.1" 200 346 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 ::1 - - [06/Mar/2024:17:24:13 +0000] "GET /index.html HTTP/1.1" 200 346 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 ::1 - - [06/Mar/2024:17:25:13 +0000] "GET /movies HTTP/1.1" 200 272 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+::1 - - [07/Mar/2024:21:15:44 +0000] "GET / HTTP/1.1" 200 59 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+::1 - - [07/Mar/2024:21:15:44 +0000] "GET /favicon.ico HTTP/1.1" 200 15406 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+::1 - - [07/Mar/2024:21:16:01 +0000] "GET /documentation HTTP/1.1" 200 2031 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+::1 - - [07/Mar/2024:21:16:01 +0000] "GET /favicon.ico HTTP/1.1" 304 - "http://localhost:8080/documentation" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
