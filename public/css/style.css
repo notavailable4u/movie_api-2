@@ -1,0 +1,22 @@
+/******** Main Section ********/
+main {
+    max-width: 770px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+/* Endpoints table - documentation */
+.endpoints-table {
+    text-align: center;
+    width: 100%;
+}
+
+.endpoints-table th {
+    padding: 5px;
+    background-color: #70A788;
+}
+
+.endpoints-table tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+/* End Endpoints table - documentation */

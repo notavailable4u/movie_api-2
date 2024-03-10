@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Documentation - Movie API</title>
 </head>
 
@@ -42,6 +43,97 @@
             <li>Allow users to remove a movie from their list of favorites</li>
             <li>Allow existing users to deregister</li>
         </ul>
+
+        <h2>Endpoints</h2>
+        <table class="endpoints-table">
+            <thead>
+                <tr>
+                    <th>Request</th>
+                    <th>URL</th>
+                    <th>HTTP Method</th>
+                    <th>Request Body Data Format</th>
+                    <th>Response Body Data Format</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Return a list of ALL movies to the user.</td>
+                    <td>/movies</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding a list of all movies in database.</td>
+                </tr>
+                <tr>
+                    <td>Return data (description, genre, director, image URL, etc.) about a
+                        single movie by title to the user.</td>
+                    <td>/movies/[Title]</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data (description, genre, director, image URL, whether it’s featured or
+                        not) about a single movie title</td>
+                </tr>
+                <tr>
+                    <td>Return data about a genre (description) by name/title (e.g., “Thriller”).</td>
+                    <td>/movies/Genre/[GenreName]</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data (description) about a single genre by name/title.</td>
+                </tr>
+                <tr>
+                    <td>Return data about a director (bio, birth year, death year) by name.</td>
+                    <td>/movies/Director/[DirectorName]</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data (bio, birth year, death year) about a director by name.</td>
+                </tr>
+                <tr>
+                    <td>Add new user / new user registration.</td>
+                    <td>/Users</td>
+                    <td>POST</td>
+                    <td>A JSON object holding data about the user. Sample structure:
+                        <code>{</code>
+                        <code>name: "Jane",</code>
+                        <code>favoriteMovies: []</code>
+                        <code>}</code>
+                    </td>
+                    <td>A JSON object holding data about the new user, including the assigned user ID.</td>
+                </tr>
+                <tr>
+                    <td>Allow users to update their user info (username)</td>
+                    <td>/users/[id]</td>
+                    <td>PUT</td>
+                    <td>None</td>
+                    <td>A message confirming the Username has been successfully updated.</td>
+                </tr>
+                <tr>
+                    <td>Allow users to add a movie to their list of favorites</td>
+                    <td>/users/[id]/[movieTitle]</td>
+                    <td>POST</td>
+                    <td>A JSON object holding data about the user's new Favorite Movie Title addition. Sample structure:
+                        <code>{"favoriteMovies": "[My Favorite Movie]"}</code>
+                    </td>
+                    <td>A message confirming the User's Favorite List has been updated with the new
+                        Movie Title.</td>
+                </tr>
+                <tr>
+                    <td>Allow users to remove a movie to their list of favorites</td>
+                    <td>/users/[id]/[movieTitle]</td>
+                    <td>DELETE</td>
+                    <td>None</td>
+                    <td>A message confirming a Movie Title has been successfully removed from the User's Favorite List.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Allow existing users to deregister </td>
+                    <td>/users/[id]</td>
+                    <td>DELETE</td>
+                    <td>None</td>
+                    <td>A message confirming the user has been successfully removed.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </main>
 
 </body>
