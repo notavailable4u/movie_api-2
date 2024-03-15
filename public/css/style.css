@@ -1,13 +1,13 @@
 /******** Main Section ********/
 main {
-    max-width: 770px;
+    max-width: 850px;
     margin: 0 auto;
     flex: 1;
 }
 
 /* Endpoints table - documentation */
 .endpoints-table {
-    text-align: center;
+    text-align: left;
     width: 100%;
 }
 
@@ -16,7 +16,15 @@ main {
     background-color: #70A788;
 }
 
+.endpoints-table td {
+    padding: 5px;
+    vertical-align: top;
+}
+
 .endpoints-table tr:nth-child(odd) {
     background-color: #f2f2f2;
+}
+pre {
+    white-space: pre-line;
 }
 /* End Endpoints table - documentation */
