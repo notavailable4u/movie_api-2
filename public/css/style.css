@@ -9,6 +9,7 @@ main {
 .endpoints-table {
     text-align: left;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .endpoints-table th {
