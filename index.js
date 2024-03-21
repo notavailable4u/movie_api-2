@@ -9,6 +9,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const { check, validationResult } = require('express-validator');
+
+
+const cors = require('cors');
+app.use(cors());
+
 // Import and configure authentication
 // eslint-disable-next-line no-unused-vars
 let auth = require('./auth')(app);
@@ -99,58 +105,48 @@ app.get('/Movies/Director/:Name', passport.authenticate('jwt', { session: false 
 
 //POST requests 
 // POST new user - User Registration
-app.post('/users', async (req, res) => {
-    await Users.findOne({ Username: req.body.Username })
-        .then((user) => {
-            if (user) {
-                return res.status(400).send(`${req.body.Username} already exists`);
-            } else {
-                Users
-                    .create({
-                        Username: req.body.Username,
-                        Password: req.body.Password,
-                        Email: req.body.Email,
-                        Birthday: req.body.Birthday,
-                        favoriteMovies: []
-                    })
-                    .then((user) => { res.status(201).json(user) })
-                    .catch((error) => {
-                        console.error(error);
-                        res.status(500).send(`Error: ${error}`);
-                    })
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send(`Error: ${error}`);
-        });
-});
-
-// PUT request to change users name -search by username
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    // CONDITION TO CHECK ADDED HERE
-    if (req.user.Username !== req.params.Username) {
-        return res.status(400).send('Permission denied');
-    }
-    // CONDITION ENDS
-    await Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $set:
-        {
-            Username: req.body.Username,
-            Password: req.body.Password,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday
+app.post('/users',
+    //Validation Logic Username, Password, Email
+    [
+        check('Username', 'Username must be a minimum of 5 characters in length.').isLength({ min: 5 }),
+        check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric().trim().escape(),
+        check('Password', 'Password is required').not().isEmpty(),
+        check('Password', 'Password must be a minimum of 8 characters in length.').isLength({ min: 8 }).isAlphanumeric().trim().escape(),
+        check('Email', 'Email does not appear to be valid').isEmail().normalizeEmail().trim().escape()
+    ],
+    async (req, res) => {
+        // Check validation object for errors
+        let errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
         }
-    },
-        { new: true }) //return updated document
-        .then((updatedUser) => {
-            res.json(updatedUser);
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send(`Error: ${err}`);
-        })
-});
+
+        let hashedPassword = Users.hashPassword(req.body.Password);
+        await Users.findOne({ Username: req.body.Username })
+            .then((user) => {
+                if (user) {
+                    return res.status(400).send(`${req.body.Username} already exists`);
+                } else {
+                    Users
+                        .create({
+                            Username: req.body.Username,
+                            Password: hashedPassword,
+                            Email: req.body.Email,
+                            Birthday: req.body.Birthday,
+                            favoriteMovies: []
+                        })
+                        .then((user) => { res.status(201).json(user) })
+                        .catch((error) => {
+                            console.error(error);
+                            res.status(500).send(`Error: ${error}`);
+                        });
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                res.status(500).send(`Error: ${error}`);
+            });
+    });
 
 // Add movie to user Favorite list - search by username
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
@@ -166,6 +162,43 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
             res.status(500).send(`Error: ${err}`);
         });
 });
+
+// PUT request to update user info (username,email) -search by username
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }),
+    //Validation Logic Username, Email
+    [
+        check('Username', 'Username must be a minimum of 5 characters in length.').isLength({ min: 5 }),
+        check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric().trim().escape(),
+        check('Email', 'Email does not appear to be valid').isEmail().normalizeEmail().trim().escape()
+    ],
+    async (req, res) => {
+        //check validation object for errors
+        let errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        // Check to see if User exists
+        if (req.user.Username !== req.params.Username) {
+            return res.status(400).send('Permission denied');
+        }
+        await Users.findOneAndUpdate({ Username: req.params.Username }, {
+            $set:
+            {
+                Username: req.body.Username,
+                Email: req.body.Email,
+                Birthday: req.body.Birthday
+            }
+        },
+            { new: true }) //return updated document
+            .then((updatedUser) => {
+                res.json(updatedUser);
+            })
+            .catch((err) => {
+                console.error(err);
+                res.status(500).send(`Error: ${err}`);
+            })
+    });
 
 //DELETE Requests
 // Remove movie from user Favorite List
@@ -204,6 +237,7 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 app.use(serveStatic('./public', { extensions: ['html', 'htm'] }));
 
 // listen for requests
-app.listen(8080, () => {
-    console.log('Your app is listening on port 8080.');
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => {
+    console.log('Listening on Port ' + port);
 });

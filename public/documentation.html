@@ -182,19 +182,34 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>6. Allow users to update their user info (username)</td>
+                    <td>6. Allow users to update their user info (username, email, birthday) </td>
                     <td>/users/:Username</td>
                     <td>PUT</td>
-                    <td>A JSON object object holding data with the new Username. Sample:
+                    <td>A JSON object object holding data with the requested updated user info. Sample:
                         <pre>
                             <code>
                                 {
-                                    "Username": "NewName9"
+                                    "Username": "NewName9",
+                                    "Email": "updated@email.com",
+                                    "Birthday": Year/Month/Day"
                                 }
                             </code>
                         </pre>
                     </td>
-                    <td>A message confirming the Username has been successfully updated.</td>
+                    <td>A JSON object displaying the updated User information. Sample:
+                        <pre>
+                            <code>
+                                {
+                                    "_id": "user id number",
+                                    "Username": "NewName9",
+                                    "Password": "HASHED",
+                                    "Email": "updated@email.com",
+                                    "Birthday": "Year/Month/Day",
+                                    "FavoriteMovies": []
+                                }
+                            </code>
+                        </pre>
+                    </td>
                 </tr>
                 <tr>
                     <td>7. Allow users to add a movie to their list of favorites</td>

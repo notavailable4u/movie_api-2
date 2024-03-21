@@ -20,6 +20,7 @@ jspm_packages/
 
 #ESLintrc
 .eslintrc.json
+.eslintrc.js
 
 # Optional stylelint cache
 .stylelintcache
@@ -35,6 +36,9 @@ stylelint.config.js
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+# VScode
+.vscode
 
 # yarn v2
 .yarn/cache
