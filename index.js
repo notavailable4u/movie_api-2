@@ -26,7 +26,8 @@ require('./passport');
 const serveStatic = require('serve-static');
 //const uuid = require('uuid');
 
-mongoose.connect('mongodb://127.0.0.1/project2');
+//local copy- mongoose.connect('mongodb://127.0.0.1/project2');
+mongoose.connect(process.env.CONNECTION_URI); //Heroku connection
 
 //Morgan
 // const morgan = require('morgan');
