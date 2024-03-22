@@ -26,22 +26,12 @@ require('./passport');
 const serveStatic = require('serve-static');
 //const uuid = require('uuid');
 
-//local copy- mongoose.connect('mongodb://127.0.0.1/project2');
+//mongoose.connect('mongodb://127.0.0.1/project2'); //Local Copy
 mongoose.connect(process.env.CONNECTION_URI); //Heroku connection
-
-//Morgan
-// const morgan = require('morgan');
-// const fs = require('fs'); // import built in node modules fs and path 
-// const { error } = require('console');
-// // create a write stream (in append mode)
-// // a ‘log.txt’ file is created in root directory
-// const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { flags: 'a' });
-// // setup the logger
-// app.use(morgan('combined', { stream: accessLogStream }));
 
 // GET requests
 app.get('/', (req, res) => {
-    res.send('<h2>Movie Database API.</h2><p>This page was required by Career Foundry but they never explained why.</p>');
+    res.send('<h2>Movie Database API</h2><h4>Patrick Gannon</h4><p>This page was required by Career Foundry but they never explained why.</p>');
 });
 
 //GET all movies

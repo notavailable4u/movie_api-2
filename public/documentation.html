@@ -58,7 +58,7 @@
             <tbody>
                 <tr>
                     <td></td>
-                    <td>Return a list of ALL movies to the user.</td>
+                    <td>Return a list of ALL MOVIES to the user.</td>
                     <td>/Movies</td>
                     <td>GET</td>
                     <td>None</td>
@@ -87,7 +87,7 @@
                 <tr>
                     <td></td>
                     <td>Return data (description, genre, director, image URL, etc.) about a
-                        single movie to the user after searching by movie title.</td>
+                        SINGLE MOVIE to the user after searching by movie title.</td>
                     <td>/Movies/:Title</td>
                     <td>GET</td>
                     <td>None</td>
@@ -116,7 +116,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Return data about a genre (description) after searching by name/title (e.g., "Drama").</td>
+                    <td>Return data about a GENRE (description) after searching by name/title (e.g., "Drama").</td>
                     <td>/Movies/Genre/:Name</td>
                     <td>GET</td>
                     <td>None</td>
@@ -134,7 +134,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Return data about a director (bio, birth year, death year) after searching by name.</td>
+                    <td>Return data about a DIRECTOR (bio, birth year, death year) after searching by name.</td>
                     <td>/Movies/Director/:Name</td>
                     <td>GET</td>
                     <td>None</td>
@@ -153,7 +153,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Add new user / new user registration.</td>
+                    <td>Add new user / NEW USER REGISTRATION.</td>
                     <td>/Users</td>
                     <td>POST</td>
                     <td>A JSON object holding data about the user. Sample structure:
@@ -185,7 +185,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Allow users to update their user info (username, email)</td>
+                    <td>Allow users to UPDATE their USER INFO (username, email)</td>
                     <td>/users/:Username</td>
                     <td>PUT</td>
                     <td>A JSON object object holding data with the requested updated user info. Sample:
@@ -215,25 +215,41 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Allow users to add a movie to their list of favorites</td>
+                    <td>Allow users to ADD a MOVIE TO their LIST OF FAVORITES</td>
                     <td>/users/:Username/movies/:MovieID</td>
                     <td>POST</td>
                     <td>None. Info retrieved from request parameters.</td>
-                    <td>A message confirming the User's Favorite List has been updated with the new
-                        Movie Title.</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>Allow users to remove a movie to their list of favorites</td>
-                    <td>/users/:Username/movies/:MovieID</td>
-                    <td>DELETE</td>
-                    <td>None. Info retrieved from request parameters.</td>
-                    <td>A message confirming a Movie Title has been successfully removed from the User's Favorite List.
+                    <td>A JSON object displaying the users' updated Favorite Movies List. Sample:
+                        <pre>
+                            <code>{
+                                "Username": "UserName",
+                                "Email": "new@newemail.com",
+                                "FavoriteMovies": [ "65f09105401e816cfbf7a738" ]
+                                }
+                            </code>
+                        </pre>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Allow existing users to deregister </td>
+                    <td>Allow users to REMOVE a MOVIE TO their LIST OF FAVORITES</td>
+                    <td>/users/:Username/movies/:MovieID</td>
+                    <td>DELETE</td>
+                    <td>None. Info retrieved from request parameters.</td>
+                    <td>A JSON object displaying the users' updated Favorite Movies List. Sample:
+                        <pre>
+                            <code>{
+                                "Username": "UserName",
+                                "Email": "new@newemail.com",
+                                "FavoriteMovies": [  ]
+                                }
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Allow existing USER to DEREGISTER </td>
                     <td>/users/:Username</td>
                     <td>DELETE</td>
                     <td>None</td>

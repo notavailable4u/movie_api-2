@@ -33,6 +33,7 @@ main {
 }
 
 .endpoints-table tr:nth-child(odd) {background-color: #f2f2f2;}
+.endpoints-table tr:nth-child(even) {background: rgba(0, 128, 0, 0.1)}
 
 .endpoints-table tr:hover {background-color: #D6EEEE;}
 
