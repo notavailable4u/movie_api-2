@@ -2,15 +2,16 @@
 
 /******** Main Section ********/
 main {
-    max-width: 850px;
+    max-width: 770px;
     margin: 0 auto;
-    flex: 1;
+    /* flex: 1; */
 }
 
 /* Endpoints table - documentation */
 .endpoints-table {
     text-align: left;
-    width: 100%;
+    width: auto;
+    max-width: 770px;
     border-style:solid;
     border-color: #2C6E49;
     margin: 20px auto;
