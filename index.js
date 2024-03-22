@@ -41,7 +41,7 @@ mongoose.connect(process.env.CONNECTION_URI); //Heroku connection
 
 // GET requests
 app.get('/', (req, res) => {
-    res.send('<h2>This is a default textual response of my choosing.</h2>');
+    res.send('<h2>Movie Database API.</h2><p>This page was required by Career Foundry but they never explained why.</p>');
 });
 
 //GET all movies
@@ -112,7 +112,7 @@ app.post('/users',
         check('Username', 'Username must be a minimum of 5 characters in length.').isLength({ min: 5 }),
         check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric().trim().escape(),
         check('Password', 'Password is required').not().isEmpty(),
-        check('Password', 'Password must be a minimum of 8 characters in length.').isLength({ min: 8 }).isAlphanumeric().trim().escape(),
+        check('Password', 'Password must be a minimum of 8 characters in length and cannot use any special characters or punctuation marks.').isLength({ min: 8 }).isAlphanumeric().trim().escape(),
         check('Email', 'Email does not appear to be valid').isEmail().normalizeEmail().trim().escape()
     ],
     async (req, res) => {
@@ -188,7 +188,6 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }),
             {
                 Username: req.body.Username,
                 Email: req.body.Email,
-                Birthday: req.body.Birthday
             }
         },
             { new: true }) //return updated document

@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
     <main>
         <h1>Documentation for Movie API</h1>
 
@@ -48,6 +47,7 @@
         <table class="endpoints-table">
             <thead>
                 <tr>
+                    <th>Endpoint Number</th>
                     <th>Request</th>
                     <th>URL</th>
                     <th>HTTP Method</th>
@@ -57,7 +57,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>1. Return a list of ALL movies to the user.</td>
+                    <td></td>
+                    <td>Return a list of ALL movies to the user.</td>
                     <td>/Movies</td>
                     <td>GET</td>
                     <td>None</td>
@@ -81,12 +82,12 @@
                         Featured: Boolean
                         }</code>
                     </pre>
-
                     </td>
                 </tr>
                 <tr>
-                    <td>2. Return data (description, genre, director, image URL, etc.) about a
-                        single movie by title to the user.</td>
+                    <td></td>
+                    <td>Return data (description, genre, director, image URL, etc.) about a
+                        single movie to the user after searching by movie title.</td>
                     <td>/Movies/:Title</td>
                     <td>GET</td>
                     <td>None</td>
@@ -114,7 +115,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>3. Return data about a genre (description) by name/title (e.g., “Thriller”).</td>
+                    <td></td>
+                    <td>Return data about a genre (description) after searching by name/title (e.g., "Drama").</td>
                     <td>/Movies/Genre/:Name</td>
                     <td>GET</td>
                     <td>None</td>
@@ -124,15 +126,15 @@
                                 {
                                     "Genre": {
                                         "Name": "Genre Name",
-                                        "Description": "Description of Genre."
-                                    }
+                                        "Description": "Description of Genre."}
                                 }
                             </code>
                         </pre>
                     </td>
                 </tr>
                 <tr>
-                    <td>4. Return data about a director (bio, birth year, death year) by name.</td>
+                    <td></td>
+                    <td>Return data about a director (bio, birth year, death year) after searching by name.</td>
                     <td>/Movies/Director/:Name</td>
                     <td>GET</td>
                     <td>None</td>
@@ -143,15 +145,15 @@
                                     "Director": {
                                         "Name": "Quentin Tarantino",
                                         "Bio": "Quentin Jerome Tarantino is an American film director, screenwriter, producer, and actor.",
-                                        "Birth": 1963
-                                    }
+                                        "Birth": 1963}
                                 }
                             </code>
                         </pre>
                     </td>
                 </tr>
                 <tr>
-                    <td>5. Add new user / new user registration.</td>
+                    <td></td>
+                    <td>Add new user / new user registration.</td>
                     <td>/Users</td>
                     <td>POST</td>
                     <td>A JSON object holding data about the user. Sample structure:
@@ -182,7 +184,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>6. Allow users to update their user info (username, email)</td>
+                    <td></td>
+                    <td>Allow users to update their user info (username, email)</td>
                     <td>/users/:Username</td>
                     <td>PUT</td>
                     <td>A JSON object object holding data with the requested updated user info. Sample:
@@ -211,7 +214,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>7. Allow users to add a movie to their list of favorites</td>
+                    <td></td>
+                    <td>Allow users to add a movie to their list of favorites</td>
                     <td>/users/:Username/movies/:MovieID</td>
                     <td>POST</td>
                     <td>None. Info retrieved from request parameters.</td>
@@ -219,7 +223,8 @@
                         Movie Title.</td>
                 </tr>
                 <tr>
-                    <td>8. Allow users to remove a movie to their list of favorites</td>
+                    <td></td>
+                    <td>Allow users to remove a movie to their list of favorites</td>
                     <td>/users/:Username/movies/:MovieID</td>
                     <td>DELETE</td>
                     <td>None. Info retrieved from request parameters.</td>
@@ -227,7 +232,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>9. Allow existing users to deregister </td>
+                    <td></td>
+                    <td>Allow existing users to deregister </td>
                     <td>/users/:Username</td>
                     <td>DELETE</td>
                     <td>None</td>

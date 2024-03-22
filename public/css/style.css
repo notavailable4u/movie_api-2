@@ -1,3 +1,5 @@
+* {box-sizing: border-box;}
+
 /******** Main Section ********/
 main {
     max-width: 850px;
@@ -9,8 +11,16 @@ main {
 .endpoints-table {
     text-align: left;
     width: 100%;
-    margin-bottom: 10px;
+    border-style:solid;
+    border-color: #2C6E49;
+    margin: 20px auto;
+    table-layout: auto;
+    counter-reset: tr -1;
 }
+
+.endpoints-table tr {counter-increment: tr;}
+
+.endpoints-table tr td:first-child::before {content: counter(tr) ". ";}
 
 .endpoints-table th {
     padding: 5px;
@@ -22,10 +32,9 @@ main {
     vertical-align: top;
 }
 
-.endpoints-table tr:nth-child(odd) {
-    background-color: #f2f2f2;
-}
-pre {
-    white-space: pre-line;
-}
+.endpoints-table tr:nth-child(odd) {background-color: #f2f2f2;}
+
+.endpoints-table tr:hover {background-color: #D6EEEE;}
+
+pre {white-space: pre-line;}
 /* End Endpoints table - documentation */
