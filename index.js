@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const Models = require('./models.js');
+const models = require('./models.js');
 
-const Movies = Models.Movie;
-const Users = Models.User;
+const movies = models.movie;
+const users = models.user;
 
 const express = require('express');
 const app = express();
@@ -22,21 +22,19 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-//const path = require('path');
 const serveStatic = require('serve-static');
-//const uuid = require('uuid');
 
-//mongoose.connect('mongodb://127.0.0.1/project2'); //Local Copy
+
 mongoose.connect(process.env.CONNECTION_URI); //Heroku connection
 
 // GET requests
 app.get('/', (req, res) => {
-    res.send('<h2>Movie Database API</h2><h4>Patrick Gannon</h4><p>This page was required by Career Foundry but they never explained why.</p>');
+    res.send('<h2>Movie Database API</h2><h4>Patrick Gannon</h4>');
 });
 
 //GET all movies
-app.get('/Movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Movies.find()
+app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await movies.find()
         .then((movies) => {
             res.status(201).json(movies)
         })
@@ -47,8 +45,8 @@ app.get('/Movies', passport.authenticate('jwt', { session: false }), async (req,
 });
 
 // GET a user by username
-app.get('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Users.findOne({ Username: req.params.Username })
+app.get('/users/:username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await users.findOne({ username: req.params.username })
         .then((user) => {
             res.json(user);
         })
@@ -59,8 +57,8 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), as
 });
 
 //GET single movie by title
-app.get('/Movies/:Title', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Movies.findOne({ Title: req.params.Title })
+app.get('/movies/:title', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await movies.findOne({ title: req.params.title })
         .then((movie) => {
             res.json(movie);
         })
@@ -71,8 +69,8 @@ app.get('/Movies/:Title', passport.authenticate('jwt', { session: false }), asyn
 });
 
 //GET single genre description by name
-app.get('/Movies/Genre/:Name', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Movies.findOne({ 'Genre.Name': req.params.Name }, { 'Genre.Name': 1, 'Genre.Description': 1, _id: 0 })
+app.get('/movies/genre/:name', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await movies.findOne({ 'genre.name': req.params.Name }, { 'genre.name': 1, 'genre.description': 1, _id: 0 })
         .then((genre) => {
             res.json(genre);
         })
@@ -83,8 +81,8 @@ app.get('/Movies/Genre/:Name', passport.authenticate('jwt', { session: false }),
 });
 
 //GET single director by name
-app.get('/Movies/Director/:Name', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Movies.findOne({ 'Director.Name': req.params.Name }, { 'Director.Name': 1, 'Director.Bio': 1, 'Director.Birth': 1, 'Director.Death': 1, _id: 0 })
+app.get('/movies/director/:name', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await movies.findOne({ 'director.name': req.params.Name }, { 'director.name': 1, 'director.bio': 1, 'director.birth': 1, 'director.death': 1, _id: 0 })
         .then((director) => {
             res.json(director);
         })
@@ -99,11 +97,11 @@ app.get('/Movies/Director/:Name', passport.authenticate('jwt', { session: false 
 app.post('/users',
     //Validation Logic Username, Password, Email
     [
-        check('Username', 'Username must be a minimum of 5 characters in length.').isLength({ min: 5 }),
-        check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric().trim().escape(),
-        check('Password', 'Password is required').not().isEmpty(),
-        check('Password', 'Password must be a minimum of 8 characters in length and cannot use any special characters or punctuation marks.').isLength({ min: 8 }).isAlphanumeric().trim().escape(),
-        check('Email', 'Email does not appear to be valid').isEmail().normalizeEmail().trim().escape()
+        check('username', 'Username must be a minimum of 5 characters in length.').isLength({ min: 5 }),
+        check('username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric().trim().escape(),
+        check('password', 'Password is required').not().isEmpty(),
+        check('password', 'Password must be a minimum of 8 characters in length and cannot use any special characters or punctuation marks.').isLength({ min: 8 }).isAlphanumeric().trim().escape(),
+        check('email', 'Email does not appear to be valid').isEmail().normalizeEmail().trim().escape()
     ],
     async (req, res) => {
         // Check validation object for errors
@@ -112,18 +110,18 @@ app.post('/users',
             return res.status(422).json({ errors: errors.array() });
         }
 
-        let hashedPassword = Users.hashPassword(req.body.Password);
-        await Users.findOne({ Username: req.body.Username })
+        let hashedPassword = users.hashPassword(req.body.Password);
+        await users.findOne({ username: req.body.username })
             .then((user) => {
                 if (user) {
-                    return res.status(400).send(`${req.body.Username} already exists`);
+                    return res.status(400).send(`${req.body.username} already exists`);
                 } else {
-                    Users
+                    users
                         .create({
-                            Username: req.body.Username,
-                            Password: hashedPassword,
-                            Email: req.body.Email,
-                            Birthday: req.body.Birthday,
+                            username: req.body.username,
+                            password: hashedPassword,
+                            email: req.body.email,
+                            birthday: req.body.birthday,
                             favoriteMovies: []
                         })
                         .then((user) => { res.status(201).json(user) })
@@ -140,9 +138,9 @@ app.post('/users',
     });
 
 // Add movie to user Favorite list - search by username
-app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $addToSet: { FavoriteMovies: req.params.MovieID }
+app.post('/users/:username/movies/:movieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await users.findOneAndUpdate({ username: req.params.username }, {
+        $addToSet: { favoriteMovies: req.params.movieID }
     },
         { new: true }) //return updated document
         .then((updatedUser) => {
@@ -155,12 +153,12 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 });
 
 // PUT request to update user info (username,email) -search by username
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }),
+app.put('/users/:username', passport.authenticate('jwt', { session: false }),
     //Validation Logic Username, Email
     [
-        check('Username', 'Username must be a minimum of 5 characters in length.').isLength({ min: 5 }),
-        check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric().trim().escape(),
-        check('Email', 'Email does not appear to be valid').isEmail().normalizeEmail().trim().escape()
+        check('username', 'Username must be a minimum of 5 characters in length.').isLength({ min: 5 }),
+        check('username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric().trim().escape(),
+        check('email', 'Email does not appear to be valid').isEmail().normalizeEmail().trim().escape()
     ],
     async (req, res) => {
         //check validation object for errors
@@ -170,14 +168,14 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }),
             return res.status(422).json({ errors: errors.array() });
         }
         // Check to see if User exists
-        if (req.user.Username !== req.params.Username) {
+        if (req.user.username !== req.params.username) {
             return res.status(400).send('Permission denied');
         }
-        await Users.findOneAndUpdate({ Username: req.params.Username }, {
+        await users.findOneAndUpdate({ username: req.params.username }, {
             $set:
             {
-                Username: req.body.Username,
-                Email: req.body.Email,
+                username: req.body.username,
+                email: req.body.Email,
             }
         },
             { new: true }) //return updated document
@@ -192,9 +190,9 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }),
 
 //DELETE Requests
 // Remove movie from user Favorite List
-app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $pull: { FavoriteMovies: req.params.MovieID }
+app.delete('/users/:username/movies/:movieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await users.findOneAndUpdate({ username: req.params.username }, {
+        $pull: { favoriteMovies: req.params.movieID }
     },
         { new: true }) //return updated document
         .then((updatedUser) => {
@@ -208,13 +206,13 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
 
 
 //Delete - Deregister User
-app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Users.findOneAndDelete({ Username: req.params.Username })
+app.delete('/users/:username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await users.findOneAndDelete({ username: req.params.username })
         .then((user) => {
             if (!user) {
-                res.status(400).send(`${req.params.Username} was not found`);
+                res.status(400).send(`${req.params.username} was not found`);
             } else {
-                res.status(200).send(`${req.params.Username} was deleted.`);
+                res.status(200).send(`${req.params.username} was deleted.`);
             }
         })
         .catch((err) => {
