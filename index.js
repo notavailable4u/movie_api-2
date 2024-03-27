@@ -12,7 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 
 const { check, validationResult } = require('express-validator');
 
-
 const cors = require('cors');
 app.use(cors());
 
@@ -32,7 +31,7 @@ mongoose.connect(process.env.CONNECTION_URI); //Heroku connection
 
 // GET requests
 app.get('/', (req, res) => {
-    res.send('Hello ${process.env.HELLO}');
+    res.send('<h2>Movie Database API</h2><h4>Patrick Gannon</h4>');
 });
 
 //GET all movies
@@ -207,7 +206,6 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
         });
 });
 
-
 //Delete - Deregister User
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Users.findOneAndDelete({ Username: req.params.Username })
@@ -232,3 +230,4 @@ const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {
     console.log('Listening on Port ' + port);
 });
+
