@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 
@@ -31,7 +32,7 @@ mongoose.connect(process.env.CONNECTION_URI); //Heroku connection
 
 // GET requests
 app.get('/', (req, res) => {
-    res.send('<h2>Movie Database API</h2><h4>Patrick Gannon</h4><p>This page was required by Career Foundry but they never explained why.</p>');
+    res.send('Hello ${process.env.HELLO}');
 });
 
 //GET all movies

@@ -50,3 +50,9 @@ stylelint.config.js
 ### Node Patch ###
 # Serverless Webpack directories
 .webpack/
+
+#dotenv
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
