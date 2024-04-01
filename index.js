@@ -22,16 +22,14 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-//const path = require('path');
 const serveStatic = require('serve-static');
-//const uuid = require('uuid');
 
 //mongoose.connect('mongodb://127.0.0.1/project2'); //Local Copy
 mongoose.connect(process.env.CONNECTION_URI); //Heroku connection
 
 // GET requests
-app.get('/', function (req, res) {
-    res.send(`Hello ${process.env.HELLO}`)
+app.get('/', (req, res) => {
+    res.redirect('/documentation');
 });
 
 //GET all movies
