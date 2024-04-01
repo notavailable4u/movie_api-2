@@ -30,8 +30,8 @@ const serveStatic = require('serve-static');
 mongoose.connect(process.env.CONNECTION_URI); //Heroku connection
 
 // GET requests
-app.get('/', (req, res) => {
-    res.send('<h2>Movie Database API</h2><h4>Patrick Gannon</h4>');
+app.get('/', function (req, res) {
+    res.send(`Hello ${process.env.HELLO}`)
 });
 
 //GET all movies
@@ -226,8 +226,8 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 app.use(serveStatic('./public', { extensions: ['html', 'htm'] }));
 
 // listen for requests
-const port = process.env.PORT || 8080;
-app.listen(port, '0.0.0.0', () => {
-    console.log('Listening on Port ' + port);
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Listening on Port ${PORT}`);
 });
 
