@@ -14,7 +14,7 @@ const { check, validationResult } = require('express-validator');
 
 const cors = require('cors');
 // app.use(cors());
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://movie-api-pgannon.netlify.app','http://localhost:4200/'];
+let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://movie-api-pgannon.netlify.app', 'http://localhost:4200', 'https://movie-api-ptng-d305c73322c3.herokuapp.com',];
 
 app.use(cors({
     origin: (origin, callback) => {
@@ -36,8 +36,8 @@ require('./passport');
 
 const serveStatic = require('serve-static');
 
-//mongoose.connect('mongodb://127.0.0.1/project2'); //Local Copy
-mongoose.connect(process.env.CONNECTION_URI); //Heroku connection
+mongoose.connect('mongodb://127.0.0.1/project2'); //Local Copy
+//mongoose.connect(process.env.CONNECTION_URI); //Heroku connection
 
 // GET requests
 app.get('/', (req, res) => {
