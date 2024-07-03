@@ -36,8 +36,8 @@ require('./passport');
 
 const serveStatic = require('serve-static');
 
-mongoose.connect('mongodb://127.0.0.1/project2'); //Local Copy
-//mongoose.connect(process.env.CONNECTION_URI); //Heroku connection
+//mongoose.connect('mongodb://127.0.0.1/project2'); //Local Copy
+mongoose.connect(process.env.CONNECTION_URI); //Heroku connection
 
 // GET requests
 app.get('/', (req, res) => {
