@@ -14,7 +14,7 @@ const { check, validationResult } = require('express-validator');
 
 const cors = require('cors');
 // app.use(cors());
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://movie-api-pgannon.netlify.app', 'http://localhost:4200', 'https://movie-api-ptng-d305c73322c3.herokuapp.com',];
+let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://movie-api-pgannon.netlify.app', 'http://localhost:4200'];
 
 app.use(cors({
     origin: (origin, callback) => {
