@@ -1,5 +1,5 @@
 # movie_api-2
-his project was created as part of the curriculum for the Full Stack Web Development Program at Career Foundry , the worst online program I have ever had the misfortune of being swindled by. I cannot warn anyone against enrolling in this criminal program strongly enough. 
+This project was created as part of the curriculum for the Full Stack Web Development Program at Career Foundry , the worst online program I have ever had the misfortune of being swindled by. I cannot warn anyone against enrolling in this criminal program strongly enough. 
 
 Here’s an exact quote from the instruction for an assignment in which using TypeDoc is a requirement:
 
