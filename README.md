@@ -5,5 +5,5 @@ Here’s an exact quote from the instruction for an assignment in which using Ty
 
 > “Spend a little time familiarizing yourself with TypeDoc first, since we didn’t cover it in the Exercise”
 
-I paid $8,000 to be told. “Go figure this out somewhere else on your own – but we here at CareerFoundry will still have the audacity to make something which we did not teach a requirement to pass the course.”
+I paid $8,000 to be told. “Go figure this out somewhere else on your own – but we here at CareerFoundry will still have the audacity to make something which we did not teach, a requirement to pass the course.”
 Crooks. Absolute crooks.
