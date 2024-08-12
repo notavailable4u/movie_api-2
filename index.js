@@ -14,7 +14,7 @@ const { check, validationResult } = require('express-validator');
 
 const cors = require('cors');
 // app.use(cors());
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://movie-api-pgannon.netlify.app', 'http://localhost:4200', 'https://notavailable4u.github.io', 'https://notavailable4u.github.io/myflix-angular-client', 'https://movie-api-ptng-d305c73322c3.herokuapp.com', 'http://client-react-app-code.s3-website-us-east-1.amazonaws.com'];
+let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://movie-api-pgannon.netlify.app', 'http://localhost:4200', 'https://notavailable4u.github.io', 'https://notavailable4u.github.io/myflix-angular-client', 'https://movie-api-ptng-d305c73322c3.herokuapp.com', 'http://client-react-app-code.s3-website-us-east-1.amazonaws.com', '172.31.95.169', '23.21.126.79'];
 
 app.use(cors({
     origin: (origin, callback) => {
