@@ -6,7 +6,7 @@ This project was created as part of the curriculum for the Full Stack Web Develo
 [^1]: If you are considering enrolling in the Full Stack Web Development Program at Career Foundry, I cannot strongly enough caution you to NOT ENROLL. The lessons are filled with so much deprecated code and blatant errors that it is criminal. Feel free to contact me if you would like more detailed information.
 
 ## Languages and Technologies Used
-+ Mongo DB ![Image of Mongo from Blazing Saddles used for hopefully humorous effect.](mongo.png)
++ Mongo DB
 + Mongoose
 + Node.js
 + JavaScript
@@ -29,3 +29,6 @@ Final Project was required to have the following features:
 
 ## Project Endpoints
 Documentation for all project endpoints can be found at the following Heroku link (https://movie-api-ptng-d305c73322c3.herokuapp.com/documentation)
+
+## Original Mongo
+![Image of Mongo from Blazing Saddles used for hopefully humorous effect.](mongo.png)
